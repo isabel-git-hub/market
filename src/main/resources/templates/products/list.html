@@ -1,0 +1,16 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" id="contents">
+    <a href="/product/upload" class="new-post-button">새 글 등록</a>
+    <br>
+    <h2>물품 목록</h2>
+    <br>
+    <div class="product-container">
+        <div th:each="product : ${products}" class="product-item">
+            <a th:href="@{/product/{id}(id=${product.id})}">
+                <img th:src="@{${product.imageUrl}}" alt="Thumbnail"/>
+                <p th:text="${product.name}">상품 이름</p>
+            </a>
+        </div>
+    </div>
+</div>
+</html>

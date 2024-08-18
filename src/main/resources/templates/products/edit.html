@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents">
+    <h2>상품 수정</h2>
+    <form action="/product/edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${product.id}"/>
+        <label for="name">상품 이름:</label>
+        <input type="text" id="name" name="name" th:value="${product.name}" required/><br/>
+        <label for="description">설명:</label>
+        <textarea id="description" name="description" required th:text="${product.description}"></textarea><br/>
+        <label for="image">이미지:</label>
+        <input type="file" id="image" name="image" accept="image/*"/><br/>
+        <button type="submit">수정</button>
+    </form>
+</div>
+</body>
+</html>
