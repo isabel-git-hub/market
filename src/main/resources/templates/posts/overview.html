@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/poststyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <a href="/post/create" class="new-post-button">새 글 등록</a>
+    <h2 class="page-title">게시글 목록</h2>
+    <div class="search-bar">
+        <form th:action="@{/post/search}" method="get">
+            <input type="text" name="keyword" th:value="${search.keyword}" placeholder="검색어 입력">
+            <input type="hidden" name="page" th:value="${search.page}" />
+            <input type="hidden" name="size" th:value="${search.recordSize}" />
+            <button type="submit" class="search-button">검색</button>
+        </form>
+    </div>
+    <table class="post-table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th sec:authorize="hasRole('ADMIN')">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post, iterStat : ${posts}">
+            <td th:text="${iterStat.index + 1 + (search.page - 1) * search.recordSize}"></td>
+            <td><a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
+            <td th:text="${post.author}"></td>
+            <td th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${post.hitCount}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/post/delete/{id}(id=${post.id})}" method="POST" class="delete-btn">
+                    <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit">삭제하기</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Pagination -->
+    <div>
+        <ul class="pagination">
+            <li th:if="${search.existPrevPage}">
+                <a th:href="@{/post/search(page=${search.startPage - 1}, size=${search.recordSize}, keyword=${search.keyword})}">이전</a>
+            </li>
+            <li th:each="pageNum : ${#numbers.sequence(search.startPage, search.endPage)}">
+                <a th:href="@{/post/search(page=${pageNum}, size=${search.recordSize}, keyword=${search.keyword})}" th:text="${pageNum}"></a>
+            </li>
+            <li th:if="${search.existNextPage}">
+                <a th:href="@{/post/search(page=${search.endPage + 1}, size=${search.recordSize}, keyword=${search.keyword})}">다음</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <h1>게시글 수정</h1>
+    <form th:action="@{/post/update}" th:object="${postDto}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label for="title">제목:</label>
+        <input type="text" id="title" th:field="*{title}" required>
+
+        <label for="author">작성자:</label>
+        <input type="text" id="author" th:field="*{author}" required>
+
+        <label for="content">내용:</label>
+        <textarea id="content" th:field="*{content}" rows="10" required></textarea>
+
+        <button type="submit">저장</button>
+    </form>
+    <a href="/post">목록으로 돌아가기</a>
+<!--    <a th:href="@{/product/{id}(id=${fileDto.id})}">상세 보기로 돌아가기</a>-->
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <div class="info-block">
+        <span class="info-label">제목:</span>
+        <span class="info-value" th:text="${post.title}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">작성자:</span>
+        <span class="info-value" th:text="${post.author}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">내용:</span>
+        <span class="info-value" th:text="${post.content}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">작성일:</span>
+        <span class="info-value" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}"></span>
+    </div>
+    <div class="button-group">
+        <a th:href="@{/post/update/{id}(id=${post.id})}" class="btn-edit">수정하기</a>
+        <a href="/post" class="btn-back">목록으로 돌아가기</a>
+    </div>
+</div>
+</body>
+</html>
