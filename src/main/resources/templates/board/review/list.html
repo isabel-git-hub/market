@@ -27,7 +27,7 @@
             <td th:text="${board.hitCount}"></td>
             <td>
                 <form th:action="@{/board/delete/{boardType}(boardType=${boardType})}" method="POST" sec:authorize="hasRole('ADMIN')" class="delete-btn">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
                     <button type="submit">삭제하기</button>
                 </form>
             </td>

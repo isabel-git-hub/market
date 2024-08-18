@@ -28,7 +28,7 @@
             <!-- 관리자의 경우에만 삭제 버튼이 보이도록 설정할 수 있습니다. -->
             <td sec:authorize="hasRole('ADMIN')">
                 <form th:action="@{/event/delete/{id}(id=${event.id})}" method="post" class="delete-btn">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
                     <button type="submit">삭제하기</button>
                 </form>
             </td>

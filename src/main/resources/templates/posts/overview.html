@@ -35,7 +35,7 @@
             <td th:text="${post.hitCount}"></td>
             <td sec:authorize="hasRole('ADMIN')">
                 <form th:action="@{/post/delete/{id}(id=${post.id})}" method="POST" class="delete-btn">
-                    <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<!--                    <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <button type="submit">삭제하기</button>
                 </form>
             </td>

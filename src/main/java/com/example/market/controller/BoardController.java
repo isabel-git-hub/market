@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class BoardController {
     private final BoardService boardService;
-    //private final CommentService commentService;
 
     // 게시판 목록 페이지 (페이징 및 검색 처리)
     @GetMapping("/{boardType}/list")

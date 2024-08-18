@@ -2,6 +2,7 @@ package com.example.market.controller;
 
 import com.example.market.dto.MemberDto;
 //import com.example.market.service.EmailService;
+import com.example.market.service.EmailService;
 import com.example.market.service.MemberService;
 import com.example.market.service.UserSecurityService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.UUID;
 public class MemberController {
     private final MemberService memberService;
     private final UserSecurityService userService;
-//    private final EmailService mailService;
+    private final EmailService mailService;
 
     // 로그인 페이지
     @GetMapping("/login")
@@ -145,34 +146,34 @@ public class MemberController {
         return "findPwForm";
     }
 
-//    @PostMapping("/findpw")
-//    public String findpw(Model model, MemberDto dto) {
-//        String msg = "";
-//
-//        boolean ck = memberService.checkMember(dto);
-//        if(ck) msg = "ok";
-//        else {
-//            msg = "error";
-//            model.addAttribute("msg",msg);
-//            return "findPwForm";
-//        }
-//
-//        // 권한 사용자 설정
-//        dto.setPermit(0);
-//        // 임시 패스워드 생성
-//        String tmppw = UUID.randomUUID().toString().substring(0,8);
-//        // 임시 패스워드 설정
-//        dto.setUserpw(tmppw);
-//        memberService.editUser(dto);
-//
-//        ck = mailService.makeMsgTmpPw(dto);
-//        if(!ck) {
-//            msg = "메일 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.";
-//        }
-//        msg = "메일을 통해 임시 비밀번호를 전송했습니다. 메일을 확인해 주세요.";
-//        model.addAttribute("msg",msg);
-//        return "sendmsg";
-//    }
+    @PostMapping("/findpw")
+    public String findpw(Model model, MemberDto dto) {
+        String msg = "";
+
+        boolean ck = memberService.checkMember(dto);
+        if(ck) msg = "ok";
+        else {
+            msg = "error";
+            model.addAttribute("msg",msg);
+            return "findPwForm";
+        }
+
+        // 권한 사용자 설정
+        dto.setPermit(0);
+        // 임시 패스워드 생성
+        String tmppw = UUID.randomUUID().toString().substring(0,8);
+        // 임시 패스워드 설정
+        dto.setUserpw(tmppw);
+        memberService.editUser(dto);
+
+        ck = mailService.makeMsgTmpPw(dto);
+        if(!ck) {
+            msg = "메일 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.";
+        }
+        msg = "메일을 통해 임시 비밀번호를 전송했습니다. 메일을 확인해 주세요.";
+        model.addAttribute("msg",msg);
+        return "sendmsg";
+    }
 
     @GetMapping("/findId")
     public String findId() {
