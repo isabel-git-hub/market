@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/sbstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <h1>물품 리뷰</h1>
+    <a th:href="@{/board/{boardType}/new(boardType=${boardType})}" class="btn-new-post">리뷰 작성</a>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th sec:authorize="hasRole('ADMIN')">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board, iterStat : ${boards}">
+            <td th:text="${iterStat.index + 1 + (search.page - 1) * search.recordSize}"></td>
+            <td><a th:href="@{/board/{boardType}/{id}(boardType=${board.boardType}, id=${board.id})}" th:text="${board.title}"></a></td>
+            <td th:text="${board.author}"></td>
+            <td th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${board.hitCount}"></td>
+            <td>
+                <form th:action="@{/board/delete/{boardType}(boardType=${boardType})}" method="POST" sec:authorize="hasRole('ADMIN')" class="delete-btn">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="submit">삭제하기</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- 페이징 네비게이션 -->
+    <div class="pagination">
+        <!-- 이전 페이지 링크 -->
+        <span th:if="${search.existPrevPage}">
+            <a th:href="@{/board/{boardType}/list(page=${search.startPage - search.pageSize}, size=${search.recordSize})}">이전</a>
+        </span>
+
+        <!-- 페이지 번호 링크 -->
+        <span th:each="i : ${#numbers.sequence(search.startPage, search.endPage)}">
+            <a th:href="@{/board/{boardType}/list(page=${i}, size=${search.recordSize})}" th:text="${i}" th:classappend="${i == search.page ? 'active' : ''}"></a>
+        </span>
+
+        <!-- 다음 페이지 링크 -->
+        <span th:if="${search.existNextPage}">
+            <a th:href="@{/board/{boardType}/list(page=${search.endPage + 1}, size=${search.recordSize})}">다음</a>
+        </span>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

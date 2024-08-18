@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <link th:href="@{/css/sbstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+<h1>관심물품 작성</h1>
+<form th:action="@{/board/{boardType}/new(boardType=${boardType})}" method="post">
+    <label for="author">작성자:</label>
+    <input type="text" id="author" name="author" required>
+
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">설명:</label>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+
+    <input type="submit" value="관심 등록">
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+

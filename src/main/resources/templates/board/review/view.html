@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <link th:href="@{/css/sbstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <div class="info-block">
+        <span class="info-label">제목:</span>
+        <span class="info-value" th:text="${board.title}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">작성자:</span>
+        <span class="info-value" th:text="${board.author}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">설명:</span>
+        <span class="info-value" th:text="${board.description}"></span>
+    </div>
+    <div class="info-block">
+        <span class="info-label">작성일:</span>
+        <span class="info-value" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}">작성일</span>
+    </div>
+    <div class="button-group">
+        <a th:href="@{/board/{boardType}/edit/{id}(boardType=${boardType}, id=${board.id})}" class="btn-edit">수정하기</a>
+        <a th:href="@{/board/{boardType}/list(boardType=${boardType})}" class="btn-back">목록으로 돌아가기</a>
+        <!-- 관리자만 삭제 가능하다고 가정하고 주석 처리 -->
+        <!-- <a th:href="@{/board/{boardType}/delete/{id}(boardType=${boardType}, id=${board.id})}">삭제</a> -->
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
