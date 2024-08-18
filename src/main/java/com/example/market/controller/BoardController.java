@@ -74,10 +74,9 @@ public class BoardController {
             String loggedInUser = (String) session.getAttribute("loggedInUser");
             if (loggedInUser != null) {
                 boardDto.setAuthor(loggedInUser);  // 로그인 사용자 이름을 작성자로 설정
-            } else {
-                redirectAttributes.addFlashAttribute("error", "로그인 후 작성할 수 있습니다.");
-                return "redirect:/login";
             }
+
+            // 게시글 정보 설정
             boardDto.setBoardType(boardType); // 게시판 유형 설정
             boardService.createBoard(boardDto);
             redirectAttributes.addFlashAttribute("message", "게시글이 등록되었습니다.");
