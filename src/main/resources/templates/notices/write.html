@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <h1>새 공지사항 작성</h1>
+    <form th:action="@{/notice/write}" th:object="${noticeDto}" method="post">
+        <label for="title">제목:</label>
+        <input type="text" id="title" th:field="*{title}" required>
+
+        <label for="author">작성자:</label>
+        <input type="text" id="author" th:field="*{author}" required>
+
+        <label for="content">내용:</label>
+        <textarea id="content" th:field="*{content}" rows="10" required></textarea>
+        <button type="submit">등록</button>
+    </form>
+<!--    <a href="/notice">목록으로 돌아가기</a>-->
+</div>
+</body>
+</html>
