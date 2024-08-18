@@ -1,0 +1,260 @@
+/* styles.css */
+
+/* 기본 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+#contents {
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    /*align-items: flex-start; !* 기본 정렬 방식: 왼쪽 정렬 *!*/
+    padding: 45px; /* 내부 여백 */
+    position: relative; /* 자식 요소를 위치시킬 수 있도록 설정 */
+}
+
+#contents .btn-new-post {
+    position: absolute;
+    top: 53px; /* 콘텐츠 영역 상단에서 20px */
+    right: 20px; /* 콘텐츠 영역 오른쪽에서 20px */
+    background-color: hsla(9, 100%, 64%, 0.5); /* 버튼 배경색 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#contents .btn-new-post:hover {
+    background-color: lightgrey; /* 버튼 호버 시 배경색 */
+}
+
+/* 공통적인 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column; /* 폼 요소들을 세로로 정렬 */
+    width: 100%; /* 폼이 콘텐츠 너비를 채우도록 설정 */
+}
+
+form > *:not(:last-child) {
+    margin-bottom: 10px; /* 폼 요소 간의 간격 */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Padding and border are included in the element's total width and height */
+}
+
+textarea {
+    resize: vertical;
+}
+
+button,
+input[type="submit"] {
+    background-color: hsla(9, 100%, 64%, 0.5); /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    align-self: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    width: 90px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: lightgrey;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 전체 페이지의 기본 스타일 */
+.content {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    /*margin: 0 auto;*/
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    /*background-color: #ffffff; !* 배경색을 흰색으로 설정 *!*/
+    /*display: flex;*/
+    /*flex-direction: column; !* 세로 방향으로 배치 *!*/
+    /*min-height: 100vh; !* 화면 높이를 가득 채우도록 설정 *!*/
+    position: relative; /* 위치 조정을 위한 기준 설정 */
+    margin-bottom: 80px; /* 페이지 하단에서 여유 공간 확보 */
+}
+
+/* 정보 블록 스타일 */
+.info-block {
+    display: flex;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+    width: 100%; /* 컨텐츠의 가로폭을 꽉 채움 */
+}
+
+.info-block:last-child {
+    border-bottom: none; /* 마지막 블록의 아래 테두리 제거 */
+}
+
+.info-label {
+    font-weight: bold;
+    width: 100px; /* 레이블의 고정 폭 */
+    color: #333333;
+    flex-shrink: 0; /* 레이블이 축소되지 않도록 설정 */
+}
+
+.info-value {
+    color: #666666;
+    flex: 1;
+    word-wrap: break-word; /* 긴 텍스트가 줄 바꿈되도록 설정 */
+}
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    display: flex;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+    /*margin-top: 20px;*/
+    position: absolute; /* 절대 위치를 사용하여 페이지의 특정 위치에 고정 */
+    bottom: -55px; /* 페이지 하단에서 20px 위로 위치 */
+    left: 50%; /* 페이지의 수평 가운데로 이동 */
+    transform: translateX(-50%); /* 수평 가운데 조정 */
+}
+
+.button-group a {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px 11px; /* 버튼 간 간격 */
+    transition: background-color 0.3s ease;
+}
+
+.button-group a.btn-edit {
+    background-color: #f5a1a1;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+}
+
+.button-group a.btn-edit:hover {
+    background-color: #f59191;
+}
+
+.button-group a.btn-edit:active {
+    background-color: #003d80;
+}
+
+.button-group a.btn-back {
+    background-color: #6c757d;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+}
+
+.button-group a.btn-back:hover {
+    background-color: #5a6268;
+}
+
+.button-group a.btn-back:active {
+    background-color: #343a40;
+}
+
+/* 삭제 버튼 (주석 처리) */
+.button-group a.btn-delete {
+    background-color: #dc3545;
+}
+
+.button-group a.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.button-group a.btn-delete:active {
+    background-color: #bd2130;
+}
+
+.delete-btn {
+    display: flex; /* 플렉스 박스 레이아웃을 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    margin-left: -31px; /* 왼쪽 여백 조정 */
+}
+
+/* 삭제 버튼 전용 스타일 */
+.delete-btn button {
+    background-color: #f44336; /* 버튼 배경색 */
+    color: white; /* 글자 색상 */
+    padding: 5px 16px; /* 버튼 내부 여백 조정 (좌우 여백 줄이기) */
+    font-size: 15px; /* 글자 크기 조정 */
+    border: none; /* 버튼 테두리 없애기 */
+    border-radius: 3px; /* 버튼 모서리 둥글게 */
+    width: auto; /* 기본 버튼 크기로 설정 */
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+}
+
+.delete-btn button:hover {
+    background-color: #c62828; /* 호버 시 배경색 */
+}
+
+.pagination {
+    text-align: center;
+    padding: 12px;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* 다른 콘텐츠보다 위에 오도록 설정 */
+}

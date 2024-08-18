@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content" id="contents" class="content">
+    <h1 class="centered-title">문의하기</h1>
+    <form id="inquiryForm" name="inquiryForm" action="/sendMail" method="post">
+        <table>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title" required></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="name" required></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td><input type="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td>전화번호</td>
+                <td><input type="text" name="telno" required></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="content" required></textarea></td>
+            </tr>
+        </table>
+        <input type="button" value="전송" onclick="sendMail()">
+    </form>
+</div>
+</body>
+</html>

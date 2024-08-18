@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>리유즈마켓</title>
+    <link th:href="@{/css/mystyle.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<header>
+    <h1 class="header-title">리유즈마켓</h1>
+    <div>
+       <ul>
+<!--           <li th:if="${session.loggedInUser == null}">-->
+<!--               <a th:href="@{/login}">로그인</a>-->
+<!--           </li>-->
+<!--           <li th:if="${session.loggedInUser == null}">-->
+<!--               <a th:href="@{/join}">회원가입</a>-->
+<!--           </li>-->
+<!--           <li th:if="${session.loggedInUser != null}">-->
+<!--               <span th:text="'안녕하세요, ' + ${session.loggedInUser} + '님'"></span>-->
+<!--           </li>-->
+<!--           <li th:if="${session.loggedInUser != null}">-->
+<!--               <a th:href="@{/logout}">로그아웃</a>-->
+<!--           </li>-->
+           <li sec:authorize="isAuthenticated()">
+               <span th:text="'안녕하세요, ' + ${#authentication.principal.username} + '님'"></span>
+           </li>
+           <li sec:authorize="isAnonymous()"><a th:href="@{/login}">로그인</a></li>
+           <li sec:authorize="isAnonymous()"><a th:href="@{/join}">회원가입</a></li>
+           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></li>
+       </ul>
+    </div>
+</header>
+<nav>
+    <ul id="menu">
+        <li><a th:href ="@{/}">홈</a></li>
+        <li><a href="/post">자유게시판</a></li>
+        <li><a href="/product">제품목록</a></li>
+        <li><a href="/notice">공지사항</a></li>
+        <li><a href="/inquire">문의하기</a></li>
+        <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/member}">회원정보</a></li>
+        <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/manage}">회원관리</a></li>
+    </ul>
+</nav>
+<main>
+    <div layout:fragment="content">
+    </div>
+</main>
+<footer>
+    <p>cometoused</p>
+</footer>
+</body>
+</html>
+<!--spring security 할 때 사용-->
+<!--        <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/member}">회원정보</a></li>-->
+<!--        <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/manage}">회원관리</a></li>-->
+<!--        <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/manageBoard}">게시판관리</a></li>-->
+<!--    <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/member}">회원정보</a></li>-->
+<!--    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/manage}">회원관리</a></li>-->
+<!--    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/manageBoard}">게시판관리</a></li>-->
+<!--    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></li>-->
+<!--<li sec:authorize="isAnonymous()"><a th:href="@{/login}">로그인</a></li>-->
+<!--<li sec:authorize="isAnonymous()"><a th:href="@{/join}">회원가입</a></li>-->
+<!--</ul>-->

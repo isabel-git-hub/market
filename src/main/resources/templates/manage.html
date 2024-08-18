@@ -1,0 +1,41 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" id="contents" class="content">
+    <link th:href="@{/css/mainstyle.css}" rel="stylesheet">
+<h1>회원관리</h1>
+    <form>
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>아이디</th>
+                <th>패스워드</th>
+                <th>권한</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            <tr th:each="dto, no : ${memberList}">
+                <td th:text="${no.index+1}"></td>
+                <td th:text="${dto.userid}"></td>
+                <td>
+                    <input type="password" name="userpw" th:value="${dto.userpw}">
+                </td>
+                <td>
+                    <select name="permit">
+                        <option value=0 th:selected="${dto.permit==0}">사용자</option>
+                        <option value=9 th:selected="${dto.permit==9}">관리자</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="button" value="수정"
+                           th:data-userid="${dto.userid}"
+                           onclick="userSubmit(this)">
+                </td>
+                <td>
+                    <input type="button" value="삭제"
+                           th:data-userid="${dto.userid}"
+                           onclick="deleteUser(this)">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</html>

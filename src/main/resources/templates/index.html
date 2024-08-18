@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<div layout:fragment="content" id="contents" class="container mt-4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <div class="search-bar">
+        <form th:action="@{/search}" method="get" class="search-form">
+            <input type="text" name="query" placeholder="검색어 입력" class="search-input" />
+            <button type="submit" class="search-button">검색</button>
+        </form>
+    </div>
+    <main>
+        <!-- 왼쪽 사이드바 내용 -->
+        <aside class="sidebar-left">
+            <div class="sidebar-item">
+                <h4>가입인사</h4>
+                <ul>
+                    <li>
+                        <a th:href="@{/board/welcome/list}">
+                            <i class="fa-regular fa-file-lines"></i> 출석체크
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-item">
+                <h4>관심 물품</h4>
+                <ul>
+                    <li>
+                        <a th:href="@{/board/interest/list}">
+                            <i class="fa-regular fa-file-lines"></i> 물품 리뷰
+                        </a>
+                </ul>
+            </div>
+            <div class="sidebar-item">
+                <h4>나눔</h4>
+                <ul>
+                    <li>
+                        <a th:href="@{/board/share/list}">
+                            <i class="fa-regular fa-file-lines"></i> 나눔 게시판
+                        </a>
+                </ul>
+            </div>
+            <div class="sidebar-item">
+                <h4>거래 후기</h4>
+                <ul>
+                    <li>
+                        <a th:href="@{/board/review/list}">
+                            <i class="fa-regular fa-file-lines"></i> 후기 게시판
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="container">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <div class="header">
+                        <h3>주요 공지사항</h3>
+                        <a th:href="@{/notice}" class="view-more">더 보기 &gt;</a>
+                    </div>
+                    <table class="notice-table">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="notice, iterStat : ${notices}">
+                            <td th:text="${iterStat.index + 1}"></td>
+                            <td th:text="${notice.title}"></td>
+                            <td th:text="${notice.author}"></td>
+                            <td th:text="${#temporals.format(notice.createdDate, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${notice.hitCount}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid-item">
+                    <div class="header">
+                        <h3>새로 등록된 물품</h3>
+                        <a th:href="@{/product}" class="view-more">더 보기 &gt;</a>
+                    </div>
+                    <div class="product-container" id="productContainer">
+                        <div th:each="product : ${products}" class="product-item">
+                            <a th:href="@{/product/{id}(id=${product.id})}">
+                                <img th:src="@{${product.imageUrl}}" alt="상품 이미지"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="header">
+                        <h3>이벤트</h3>
+                        <a href="/event" class="view-more">더 보기 &gt;</a>
+                    </div>
+                    <div class="event-list">
+                        <!-- 이벤트 목록 표시 -->
+                        <table class="event-table">
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="event, iterStat : ${events}">
+                                <td th:text="${iterStat.index + 1}"></td>
+                                <td th:text="${event.title}"></td>
+                                <td th:text="${event.author}"></td>
+                                <td th:text="${#temporals.format(event.createdDate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${event.hitCount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="header">
+                        <h3>등업신청</h3>
+                        <a th:href="@{/board/welcome/list}" class="view-more">더 보기 &gt;</a>
+                    </div>
+                    <div class="board-list">
+                        <table class="board-table">
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="board, iterStat: ${boards}">
+                                <td th:text="${iterStat.index + 1}"></td>
+                                <td><a th:href="@{/board/{boardType}/{id}(boardType=${board.boardType}, id=${board.id})}" th:text="${board.title}"></a></td>
+                                <td th:text="${board.author}"></td>
+                                <td th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${board.hitCount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="widget search-widget search-widget-box">
+                <h2>사기피해사례 조회</h2>
+                <form id="searchForm" class="sidebar-search-form">
+                    <input type="text" id="keyword" name="keyword" class="txt" title="피해사례 검색어 입력" placeholder="연락처 또는 계좌번호로 검색해 보세요." required />
+                    <button type="submit" class="sidebar-search-button">검색</button>
+                </form>
+                <div id="result"></div>
+                <div class="info-text">
+                    <p>"더치트는 범죄피해 방지를 위해</p>
+                    <p>2006년부터 운영되고 있습니다.</p>
+                    <p>최근 6개월내 1회 이상 등록된</p>
+                    <p>정보를 확인 할 수 있습니다."</p>
+                    <p>제공: 더치트(TheCheat.co.kr)</p>
+                </div>
+            </div>
+            <div class="widget clock-widget">
+                <div id="clock">
+                    <span class="am-pm-box" id="amPm"></span>
+                    <span id="time"></span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+</html>
+
