@@ -36,6 +36,8 @@ public class BoardController {
         model.addAttribute("boards", boardPage.getContent());
         model.addAttribute("search", search);
         model.addAttribute("boardType", boardType);
+
+
         return "board/" + boardType + "/list"; // 게시판 목록 페이지
     }
 
@@ -119,7 +121,7 @@ public class BoardController {
     }
 
     // 게시판 삭제 처리
-    @PostMapping("/delete/{boardType}")
+    @PostMapping("/board/delete/{boardType}")
     public String deleteBoard(@PathVariable String boardType, RedirectAttributes redirectAttributes) {
         try {
 //            // boardService.deleteBoard(boardType);

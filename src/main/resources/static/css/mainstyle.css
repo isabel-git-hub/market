@@ -10,7 +10,10 @@ body {
     list-style: none;
     text-align: center;
 }
-
+.pagination li {
+    display: inline-block; /* 인라인 블록으로 변경하여 가로 정렬 */
+    margin-right: 5px; /* 리스트 아이템 간의 간격 추가 */
+}
 /* 전체 페이지의 기본 스타일 */
 .content {
     font-family: Arial, sans-serif;

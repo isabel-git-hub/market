@@ -92,9 +92,9 @@ public class NoticeController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteNotice(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-//        // noticeService.deleteNotice(id);
-        redirectAttributes.addFlashAttribute("message", "공지사항이 삭제되었습니다.");
+    public String deleteNotice(@PathVariable Long id) {
+         noticeService.deleteNotice(id);
+//        redirectAttributes.addFlashAttribute("message", "공지사항이 삭제되었습니다.");
         return "redirect:/notice";
     }
 }

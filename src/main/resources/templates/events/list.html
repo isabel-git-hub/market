@@ -37,17 +37,26 @@
     </table>
     <div>
         <ul class="pagination">
+            <!-- 이전 페이지 링크 -->
             <li th:if="${search.existPrevPage}">
-                <a th:href="@{/event?page=${search.startPage - 1}}">이전</a>
+                <a th:href="@{|/event?page=${search.startPage - 1}|}">이전</a>
             </li>
+
+            <!-- 페이지 번호 링크들 -->
             <li th:each="pageNum : ${#numbers.sequence(search.startPage, search.endPage)}">
-                <a th:href="@{/event?page=${pageNum}}" th:text="${pageNum}" th:classappend="${pageNum == currentPage ? 'active' : ''}"></a>
+                <a th:href="@{|/event?page=${pageNum}|}"
+                   th:text="${pageNum}"
+                   th:classappend="${pageNum == currentPage ? 'active' : ''}">
+                </a>
             </li>
+
+            <!-- 다음 페이지 링크 -->
             <li th:if="${search.existNextPage}">
-                <a th:href="@{/event?page=${search.endPage + 1}}">다음</a>
+                <a th:href="@{|/event?page=${search.endPage + 1}|}">다음</a>
             </li>
         </ul>
     </div>
+
 </div>
 </body>
 </html>

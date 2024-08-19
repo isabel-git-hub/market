@@ -25,8 +25,8 @@
             <td th:text="${notice.author}"></td>
             <td th:text="${#temporals.format(notice.createdDate, 'yyyy-MM-dd')}"></td>
             <td th:text="${notice.hitCount}"></td>
-            <td>
-                <form th:action="@{/notice/delete/{id}(id=${notice.id})}" method="POST" sec:authorize="hasRole('ADMIN')" class="delete-btn">
+            <td sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/notice/delete/{id}(id=${notice.id})}" method="post" class="delete-btn">
 <!--                    <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <button type="submit">삭제하기</button>
                 </form>
@@ -34,20 +34,21 @@
         </tr>
         </tbody>
     </table>
-    <!-- Pagination -->
     <div>
         <ul class="pagination">
             <!-- 이전 페이지 링크 -->
             <li th:if="${search.existPrevPage}">
-                <a th:href="@{/notice?page=${search.startPage - 1}}">이전</a>
+                <a th:href="@{|/notice?page=${search.startPage - 1}|}">이전</a>
             </li>
             <!-- 페이지 번호 링크 -->
             <li th:each="pageNum : ${#numbers.sequence(search.startPage, search.endPage)}">
-                <a th:href="@{/notice?page=${pageNum}}" th:text="${pageNum}" th:classappend="${pageNum == currentPage ? 'active' : ''}"></a>
+                <a th:href="@{|/notice?page=${pageNum}|}"
+                   th:text="${pageNum}"
+                   th:classappend="${pageNum == currentPage ? 'active' : ''}"></a>
             </li>
             <!-- 다음 페이지 링크 -->
             <li th:if="${search.existNextPage}">
-                <a th:href="@{/notice?page=${search.endPage + 1}}">다음</a>
+                <a th:href="@{|/notice?page=${search.endPage + 1}|}">다음</a>
             </li>
         </ul>
     </div>
