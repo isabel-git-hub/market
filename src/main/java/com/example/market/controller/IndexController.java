@@ -36,7 +36,7 @@ public class IndexController {
         model.addAttribute("products", products);
 
         // 출석체크 데이터 추가
-        List<BoardDto> boards = boardService.getBoardsByTypeWithPaging(BoardTypeConstants.WELCOME, new Search(1, 5)).getContent();
+        List<BoardDto> boards = boardService.getAllBoardsByType(BoardTypeConstants.WELCOME);
         model.addAttribute("boards", boards);
 
         // 이벤트 데이터 추가

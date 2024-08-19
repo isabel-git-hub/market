@@ -26,8 +26,8 @@
             <td th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></td>
             <td th:text="${board.hitCount}"></td>
             <td>
-                <form th:action="@{/board/delete/{boardType}(boardType=${boardType})}" method="POST" sec:authorize="hasRole('ADMIN')" class="delete-btn">
-<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+                <form th:action="@{/board/{boardType}/delete/{id}(boardType=${board.boardType}, id=${board.id})}" method="POST" sec:authorize="hasRole('ADMIN')" class="delete-btn">
+                    <!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
                     <button type="submit">삭제하기</button>
                 </form>
             </td>

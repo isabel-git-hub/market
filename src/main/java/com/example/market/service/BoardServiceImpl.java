@@ -63,8 +63,13 @@ public class BoardServiceImpl implements BoardService {
     // 게시판 삭제
     @Transactional
     @Override
-    public void deleteBoard(String boardType) {
-        boardDao.deleteBoard(boardType);
+    public void deleteBoard(Long id) {
+        boardDao.deleteBoard(id);
+    }
+
+    @Override
+    public List<BoardDto> getAllBoardsByType(String boardType) {
+        return boardDao.findAllBoardsByType(boardType);
     }
 
 }

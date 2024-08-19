@@ -4,6 +4,8 @@ import com.example.market.com.Search;
 import com.example.market.dto.BoardDto;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface BoardService {
 
     Page<BoardDto> getBoardsByTypeWithPaging(String boardType, Search search);
@@ -18,7 +20,8 @@ public interface BoardService {
 
     void incrementHitCount(Long id);
 
-    void deleteBoard(String boardType);
+    void deleteBoard(Long id);
 
+    List<BoardDto> getAllBoardsByType(String boardType);
 }
 

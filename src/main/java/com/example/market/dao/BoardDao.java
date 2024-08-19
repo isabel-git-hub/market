@@ -39,7 +39,10 @@ public interface BoardDao {
     void incrementHitCount(@Param("id") Long id) throws DataAccessException;
 
     // 게시판 삭제
-    @Delete("DELETE FROM board WHERE board_type = #{boardType}")
-    void deleteBoard(@Param("boardType") String boardType) throws DataAccessException;
+    @Delete("DELETE FROM board WHERE id = #{id}")
+    void deleteBoard(@Param("id") Long id) throws DataAccessException;
 
+    @Select("SELECT id, title, description, author, created_date AS createdDate, updated_date AS updatedDate, hit_count AS hitCount, board_type AS boardType " +
+            "FROM board WHERE board_type = #{boardType}")
+    List<BoardDto> findAllBoardsByType(@Param("boardType") String boardType) throws DataAccessException;
 }

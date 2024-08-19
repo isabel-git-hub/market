@@ -121,15 +121,13 @@ public class BoardController {
     }
 
     // 게시판 삭제 처리
-    @PostMapping("/board/delete/{boardType}")
-    public String deleteBoard(@PathVariable String boardType, RedirectAttributes redirectAttributes) {
+    @PostMapping("/{boardType}/delete/{id}")
+    public String deleteBoard(@PathVariable String boardType, @PathVariable Long id) {
         try {
-//            // boardService.deleteBoard(boardType);
-            redirectAttributes.addFlashAttribute("message", "게시판이 삭제되었습니다.");
-            return "redirect:/board";
+             boardService.deleteBoard(id);
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "게시판 삭제에 실패했습니다.");
-            return "redirect:/board/" + boardType;
+            e.printStackTrace();
         }
+        return "redirect:/board/" + boardType + "/list";
     }
 }
